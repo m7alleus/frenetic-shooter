@@ -15,17 +15,17 @@ public class Spawner : MonoBehaviour {
     float nextSpawnTime;
 
     void Start() {
-        NextWave();    
+        NextWave();
     }
 
     void Update() {
-         if (enemiesRemainingToSpawn > 0 && Time.time > nextSpawnTime) {
+        if (enemiesRemainingToSpawn > 0 && Time.time > nextSpawnTime) {
             enemiesRemainingToSpawn--;
             nextSpawnTime = Time.time + currentWave.timeBetweenSpawns;
 
             Enemy spawnedEnemy = Instantiate(enemy, Vector3.zero, Quaternion.identity) as Enemy;
             spawnedEnemy.OnDeath += OnEnemyDeath;
-        }   
+        }
     }
 
     void OnEnemyDeath() {
@@ -37,11 +37,11 @@ public class Spawner : MonoBehaviour {
 
     void NextWave() {
         currentWaveNumber++;
-        if(currentWaveNumber - 1 < waves.Length) {
+        if (currentWaveNumber - 1 < waves.Length) {
             currentWave = waves[currentWaveNumber - 1];
             enemiesRemainingToSpawn = currentWave.enemyCount;
             enemiesRemainingAlive = enemiesRemainingToSpawn;
-        }   
+        }
     }
 
     [System.Serializable]
