@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour {
         myRigidbody = GetComponent<Rigidbody>();
     }
 
-
     public void Move(Vector3 _velocity) {
         velocity = _velocity;
     }
