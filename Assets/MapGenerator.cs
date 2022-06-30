@@ -24,6 +24,7 @@ public class MapGenerator : MonoBehaviour {
 
     Map currentMap;
 
+    // We need to be sure that this is called prior to the Spawner Start() method, that's why we use Awake() here 
     void Awake() {
         FindObjectOfType<Spawner>().OnNewWave += OnNewWave;
     }
@@ -34,7 +35,6 @@ public class MapGenerator : MonoBehaviour {
     }
 
     public void GenerateMap() {
-        print("mapIndex: " + mapIndex);
         currentMap = maps[mapIndex];
         tileMap = new Transform[currentMap.mapSize.x, currentMap.mapSize.y];
         System.Random prng = new System.Random(currentMap.seed);
@@ -165,7 +165,6 @@ public class MapGenerator : MonoBehaviour {
     }
 
     public Transform GetTileFromPosition(Vector3 position) {
-        print(currentMap);
         int x = Mathf.RoundToInt(position.x / tileSize + (currentMap.mapSize.x - 1) / 2f);
         int y = Mathf.RoundToInt(position.z / tileSize + (currentMap.mapSize.y - 1) / 2f);
         // Clamp to map size to avoid out of bounds error within the tileMap array
