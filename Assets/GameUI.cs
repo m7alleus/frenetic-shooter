@@ -21,7 +21,7 @@ public class GameUI : MonoBehaviour {
         float speed = 1 / time;
         float percent = 0;
 
-        while(percent < 1) {
+        while (percent < 1) {
             percent += Time.deltaTime * speed;
             fadePlane.color = Color.Lerp(from, to, percent);
             yield return null;

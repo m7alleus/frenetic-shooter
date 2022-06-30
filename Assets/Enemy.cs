@@ -8,6 +8,8 @@ public class Enemy : LivingEntity {
     public enum State { Idle, Chasing, Attacking };
     State currentState;
 
+    public ParticleSystem deathEffect;
+
     UnityEngine.AI.NavMeshAgent pathFinder;
     Transform target;
     LivingEntity targetEntity;
@@ -42,6 +44,13 @@ public class Enemy : LivingEntity {
 
             StartCoroutine(UpdatePath());
         }
+    }
+
+    public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection) {
+        if (damage >= health) {
+            Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDirection)) as GameObject, deathEffect.main.startLifetimeMultiplier);
+        }
+        base.TakeHit(damage, hitPoint, hitDirection);
     }
 
     void OnTargetDeath() {
