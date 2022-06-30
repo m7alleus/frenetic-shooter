@@ -50,7 +50,7 @@ public class Enemy : LivingEntity {
     }
 
     void Update() {
-        if(hasTarget) {
+        if (hasTarget) {
             if (Time.time > nextAttackTime) {
                 float sqrDstToTarget = (target.position - transform.position).sqrMagnitude;
                 if (sqrDstToTarget < Mathf.Pow(attackDistanceThreshold + myCollisionRadius + targetCollisionRadius, 2)) {
@@ -76,7 +76,7 @@ public class Enemy : LivingEntity {
         bool hasAppliedDamage = false;
 
         while (percent <= 1) {
-            if(percent >= .5f && !hasAppliedDamage){
+            if (percent >= .5f && !hasAppliedDamage) {
                 hasAppliedDamage = true;
                 targetEntity.TakeDamage(damage);
             }
