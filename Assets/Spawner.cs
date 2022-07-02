@@ -80,7 +80,7 @@ public class Spawner : MonoBehaviour {
             spawnTile = map.GetTileFromPosition(playerT.position);
         }
         Material tileMaterial = spawnTile.GetComponent<Renderer>().material;
-        Color initialColor = tileMaterial.color;
+        Color initialColor = Color.white;
         Color flashColor = Color.red;
         float spawnTimer = 0;
 

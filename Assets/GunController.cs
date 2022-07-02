@@ -32,4 +32,10 @@ public class GunController : MonoBehaviour {
             equippedGun.OnTriggerRelease();
         }
     }
+
+    public float GunHeight {
+        get {
+            return weaponHold.position.y;
+        }
+    }
 }
