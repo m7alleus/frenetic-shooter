@@ -13,6 +13,11 @@ public class Gun : MonoBehaviour {
     public float muzzleVelocity = 35;
     public int burstCount;
 
+    [Header("Recoil")]
+    public Vector2 kickMinMax = new Vector2(.05f, .2f);
+    public float recoilMoveSettleTime = .1f;
+
+    [Header("Effects")]
     public Transform shell;
     public Transform shellEjection;
 
@@ -21,9 +26,16 @@ public class Gun : MonoBehaviour {
     bool triggerReleasedSinceLastShot;
     int shotsRemainingInBurst;
 
+    Vector3 recoilSmoothDampVelocity;
+
     void Start() {
         muzzleFlash = GetComponent<MuzzleFlash>();
         shotsRemainingInBurst = burstCount;
+    }
+
+    void Update() {
+        // animate recoil    
+        transform.localPosition = Vector3.SmoothDamp(transform.localPosition, Vector3.zero, ref recoilSmoothDampVelocity, recoilMoveSettleTime);
     }
 
     void Shoot() {
@@ -48,7 +60,12 @@ public class Gun : MonoBehaviour {
 
             Instantiate(shell, shellEjection.position, shellEjection.rotation);
             muzzleFlash.Activate();
+            transform.localPosition -= Vector3.right * Random.Range(kickMinMax.x, kickMinMax.y);
         }
+    }
+
+    public void Aim(Vector3 aimPoint) {
+        transform.LookAt(aimPoint);
     }
 
     public void OnTriggerHold() {

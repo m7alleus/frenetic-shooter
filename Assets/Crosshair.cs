@@ -16,7 +16,6 @@ public class Crosshair : MonoBehaviour {
 
     void Update() {
         transform.Rotate(Vector3.forward * -40 * Time.deltaTime);
-
     }
 
     public void DetectTargets(Ray ray) {

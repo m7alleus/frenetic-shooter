@@ -34,10 +34,12 @@ public class Player : LivingEntity {
 
         if (groundPlane.Raycast(ray, out rayDistance)) {
             Vector3 point = ray.GetPoint(rayDistance);
-            // Debug.DrawLine(ray.origin, point, Color.red);
+            //Debug.DrawLine(ray.origin, point, Color.green);
             controller.LookAt(point);
             crosshair.transform.position = point;
             crosshair.DetectTargets(ray);
+            // TODO: fix this aim point
+            //gunController.Aim(point);
         }
 
         // Weapon input
